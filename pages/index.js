@@ -24,7 +24,7 @@ export default function Home({data={}}) {
 
 export async function getStaticProps(context) {
   console.log('getStaticProps')
-  const res = await fetch(`/api/hello`)
+  const res = await fetch(`https://nextjs-demo.ckken.vercel.app/api/hello`)
   const data = await res.json()
   return {
     props: {data}, // will be passed to the page component as props
