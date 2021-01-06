@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({data={}}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -10,7 +10,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-       
+       <h2>From Api</h2>
+       <p>name: {data.name}</p>
+       <p>time: {data.time}</p>
       </main>
 
       <footer className={styles.footer}>
@@ -22,8 +24,10 @@ export default function Home() {
 
 export async function getStaticProps(context) {
   console.log('getStaticProps')
+  const res = await fetch(`/api/hello`)
+  const data = await res.json()
   return {
-    props: {}, // will be passed to the page component as props
+    props: {data}, // will be passed to the page component as props
   }
 }
 
