@@ -14,3 +14,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.nav ul{
+  display: flex;
+  list-style: none;
+ }
+ .nav ul li{
+  padding: 0 10px;
+}
