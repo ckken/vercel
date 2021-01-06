@@ -27,7 +27,7 @@ export async function getStaticProps(context) {
   }
 }
 
-export async function getServerSideProps() {
+/* export async function getServerSideProps() {
   console.log('getServerSideProps')
   return { props: {  } }
-}
+} */
