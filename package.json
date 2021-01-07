@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "ncc:run": "ncc run ./nextstart.js",
-    "ncc": "ncc build ./nextstart.js -o ./ncc -m",
+    "ncc": "ncc build ./nextstart.js -o ./ncc -m --v8-cache",
     "pkg":"pkg -t host ncc/index.js -o next-start",
     "compile":"yarn ncc && yarn pkg"
   },
