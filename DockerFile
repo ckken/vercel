@@ -1,0 +1,48 @@
+# Base ───────────────────────────────────────────────────────────────────────
+FROM node:14-alpine as base
+
+WORKDIR /opt/app
+
+ENV PATH /opt/app/node_modules/.bin:$PATH
+
+# Build ──────────────────────────────────────────────────────────────────────
+FROM base as build
+
+COPY package.json .
+COPY yarn.lock .
+
+RUN true  \
+  && yarn install \
+  && true
+
+COPY . /opt/app
+
+RUN true  \
+  && yarn next build \
+  && yarn ncc build -m ./scripts/next-start.js && pkg -t host dist/index.js -o next-start \
+  && true
+
+# Service ────────────────────────────────────────────────────────────────────
+FROM alpine
+
+WORKDIR /opt/app
+ENV NODE_ENV production
+ENV PORT 8080
+
+RUN apk update && \
+  apk add --no-cache libstdc++ libgcc ca-certificates && \
+  rm -rf /var/cache/apk/*
+
+COPY --from=build /opt/app/next.config.js .
+COPY --from=build /opt/app/next-start .
+COPY --from=build /opt/app/.next .next
+COPY --from=build /opt/app/public public
+
+RUN true \
+  && addgroup -g 1001 -S nodejs \
+  && adduser -S nextjs -u 1001 \
+  && true
+
+USER nextjs
+
+CMD [ "./next-start", "-p", "$PORT" ]

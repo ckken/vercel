@@ -5,11 +5,20 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "ncc:run": "cross-env NODE_ENV=production ncc run ./nextstart.js",
+    "ncc": "cross-env NODE_ENV=production ncc build ./nextstart.js -o ./ncc -m",
+    "pkg":"pkg -t host ncc/index.js -o next-start",
+    "compile":"yarn ncc && yarn pkg"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "next": "10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.26.2",
+    "pkg": "^4.4.9"
   }
 }
