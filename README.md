@@ -8,5 +8,5 @@
 COPY --from=build /opt/app/next.config.js .
 COPY --from=build /opt/app/next-start . // 可选项
 COPY --from=build /opt/app/.next .next
-COPY --from=build /opt/app/public public // 可选项
+COPY --from=build /opt/app/public public // 可选项 nextjs 10 有 file 解决方案
 ```
