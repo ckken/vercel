@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "ncc:run": "ncc run ./nextstart.js",
     "ncc": "ncc build ./nextstart.js -o ./ncc -m --v8-cache",
