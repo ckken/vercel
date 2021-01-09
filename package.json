@@ -8,9 +8,10 @@
     "export": "next export",
     "start": "next start",
     "ncc:run": "ncc run ./nextstart.js",
-    "ncc": "ncc build ./nextstart.js -o ./ncc -m --v8-cache",
-    "pkg":"pkg -t host ncc/index.js -o next-start",
-    "compile":"yarn ncc && yarn pkg"
+    "ncc": "yarn rm && ncc build ./nextstart.js -o ./build -m",
+    "pkg": "pkg -t host build/index.js -o ./next-start",
+    "rm":"rimraf build",
+    "compile": "yarn ncc && yarn pkg"
   },
   "dependencies": {
     "next": "10.0.0",
@@ -18,8 +19,9 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "@vercel/ncc": "^0.26.2",
-    "pkg": "^4.4.9"
+    "cross-env": "^7.0.3",
+    "pkg": "^4.4.9",
+    "rimraf": "^3.0.2"
   }
 }
